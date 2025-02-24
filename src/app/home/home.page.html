@@ -1,20 +1,19 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-title>Top Animes</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <ion-list>
+    <ion-item *ngFor="let anime of popularAnimes" [routerLink]="['/home/detail', anime.mal_id]">
+      <ion-thumbnail slot="start">
+        <img [src]="anime.images.jpg.image_url" alt="{{ anime.title }}">
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{ anime.title }}</h2>
+        <p>Score: {{ anime.score }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>

@@ -1,13 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  standalone: false,
+  standalone: false, 
 })
-export class HomePage {
+export class HomePage implements OnInit {
 
-  constructor() {}
+  popularAnimes: any[] = [];
 
+  constructor(private apiService: ApiService) {}
+
+  ngOnInit() {
+    this.apiService.getPopularAnimes().subscribe(
+      (data) => {
+        console.log(data); 
+        this.popularAnimes = data.data; 
+      },
+      (error) => {
+        console.error('Error al obtener los animes:', error);
+      }
+    );
+  }
 }

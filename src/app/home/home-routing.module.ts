@@ -6,6 +6,10 @@ const routes: Routes = [
   {
     path: '',
     component: HomePage,
+  },
+  {
+    path: 'detail/:id', // Ruta dinámica para mostrar videos de un anime específico
+    loadChildren: () => import('../pages/detailanimes/detailanimes.module').then(m => m.DetailanimesPageModule)
   }
 ];
 
