@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router'; // Importa ActivatedRoute
-import { ApiService } from 'src/app/services/api.service'; // Importa el ApiService
-import { SafeUrlPipe } from '../../pipes/safe-url.pipe'; // Importa el pipe
+import { ActivatedRoute, Router } from '@angular/router';
+import { ApiService } from 'src/app/services/api.service';
+import { SafeUrlPipe } from '../../pipes/safe-url.pipe'; 
 
 @Component({
   selector: 'app-detailanimes',
@@ -17,8 +17,15 @@ export class DetailanimesPage implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private apiService: ApiService
-  ) { }
+  ) { 
+    this.router.events.subscribe(() => {
+      setTimeout(() => {
+        document.body.classList.remove('ion-page-hidden');
+      }, 50);
+    });
+  }
 
   ngOnInit() {
     

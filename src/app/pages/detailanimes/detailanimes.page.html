@@ -2,24 +2,42 @@
   <ion-toolbar>
     <ion-title>Animes Detail Clasifications</ion-title>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="home" ></ion-back-button>
+      <ion-back-button defaultHref="home"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
+
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">detailanimes</ion-title>
     </ion-toolbar>
   </ion-header>
-</ion-content>
-<ion-content *ngIf="videos.length > 0">
-  <ion-card *ngFor="let video of videos">
-    <ion-card-header>
-      <ion-card-title>{{ video.title }}</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <iframe [src]="video.embed_url | safeUrl" frameborder="0" allowfullscreen></iframe>
-    </ion-card-content>
-  </ion-card>
+
+  <!-- Verifica si hay videos -->
+  <ng-container *ngIf="videos.length > 0; else noVideos">
+    <ion-card *ngFor="let video of videos">
+      <ion-card-header>
+        <ion-card-title>{{ video.title }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="video-container">
+          <iframe 
+            [src]="video.embed_url | safeUrl" 
+            frameborder="0" 
+            allowfullscreen>
+          </iframe>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+
+  <!-- Mensaje cuando no hay videos -->
+  <ng-template #noVideos>
+    <ion-card>
+      <ion-card-content>
+        <p>No hay videos disponibles para este anime.</p>
+      </ion-card-content>
+    </ion-card>
+  </ng-template>
 </ion-content>
